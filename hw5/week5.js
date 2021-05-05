@@ -68,10 +68,6 @@ window.addEventListener('DOMContentLoaded', async function() {
             </div>
         `)
 
-        // insert HTML for number of days in forecast title
-        let forecastDays = document.querySelector(`.font-bold text-3xl`)
-        forecastDays.innerHTML(`${dayDetail} Day Forecast`) 
-
         // loop through the json forecast array 
         for (i=0; i < weatherForecast.length; i++) {
 
@@ -83,12 +79,15 @@ window.addEventListener('DOMContentLoaded', async function() {
 
             // insert HTML for the user-entered number of days forecast
             forecastOutput.insertAdjacentHTML(`beforeend`,`
-                <div>
-                    <img src="https:${forecastElement.day.condition.icon}" class="mx-auto">
-                    <h1 class="text-2xl text-bold text-gray-500">${forecastElement.date}</h1>
-                    <h2 class="text-xl">High ${forecastElement.day.maxtemp_f}° – Low ${forecastElement.day.mintemp_f}°</h2>
-                    <p class="text-gray-500">${forecastElement.day.condition.text}</h1>
-                </div>
+                <div class="text-center space-y-8">
+                    <div class="font-bold text-3xl">${dayDetail} Day Forecast</div>
+                    <div>
+                        <img src="https:${forecastElement.day.condition.icon}" class="mx-auto">
+                        <h1 class="text-2xl text-bold text-gray-500">${forecastElement.date}</h1>
+                        <h2 class="text-xl">High ${forecastElement.day.maxtemp_f}° – Low ${forecastElement.day.mintemp_f}°</h2>
+                        <p class="text-gray-500">${forecastElement.day.condition.text}</h1>
+                    </div>
+                </div>  
             `)
         }
 
