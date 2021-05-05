@@ -47,7 +47,7 @@ window.addEventListener('DOMContentLoaded', async function() {
         // - Store the interpreted location, current weather conditions, the forecast as three separate variables
         let locationData = json.location
         let weatherCurrent = json.current 
-        let weatherForecast = json.forecast
+        let weatherForecast = json.forecast.forecastday 
 
         // - Continue the recipe yourself!
         // <---- W5 LAB END. BEGIN W5 HW ---->
@@ -67,6 +67,31 @@ window.addEventListener('DOMContentLoaded', async function() {
                 </div>
             </div>
         `)
+
+        // insert HTML for number of days in forecast title
+        let forecastDays = document.querySelector(`.font-bold text-3xl`)
+        forecastDays.innerHTML(`${dayDetail} Day Forecast`) 
+
+        // loop through the json forecast array 
+        for (i=0; i < weatherForecast.length; i++) {
+
+            // create a variable to store each day's forecast in memory
+            let forecastElement = weatherForecast[i]
+
+            // get a reference to the HTML element to which we are going to add user-entered # of days forecast
+            let forecastOutput = document.querySelector(`.forecast`) 
+
+            // insert HTML for the user-entered number of days forecast
+            forecastOutput.insertAdjacentHTML(`beforeend`,`
+                <div>
+                    <img src="https:${forecastElement.day.condition.icon}" class="mx-auto">
+                    <h1 class="text-2xl text-bold text-gray-500">${forecastElement.date}</h1>
+                    <h2 class="text-xl">High ${forecastElement.day.maxtemp_f}° – Low ${forecastElement.day.mintemp_f}°</h2>
+                    <p class="text-gray-500">${forecastElement.day.condition.text}</h1>
+                </div>
+            `)
+        }
+
       }
     })
   })
